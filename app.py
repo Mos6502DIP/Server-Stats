@@ -32,7 +32,7 @@ def get_temp():
             for name, entries in temps.items():
                 if entries:  # Check if entries list is not empty
                     main_temp = entries[0].current  # First temperature entry
-                    return f"{main_temp}°C"
+                    return f"{main_temp}"
 
     except:
         return "Temperature Unknown"
