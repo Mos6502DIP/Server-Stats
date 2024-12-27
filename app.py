@@ -17,7 +17,7 @@ def get_uptime():
         return time[:-7]
 
     except Exception as e:
-        return "Uptime is not available - Exception: " + str(e)
+        return 'Uptime is not available - Exception: ' + str(e)
 
 
 def get_temp():
@@ -26,18 +26,21 @@ def get_temp():
         temps = psutil.sensors_temperatures()
 
         if not temps:
-            print("No temperature sensors found!")
+            print('No temperature sensors found!')
         else:
             # Getting the first temperature reading
             for name, entries in temps.items():
                 if entries:  # Check if entries list is not empty
                     main_temp = entries[0].current  # First temperature entry
-                    return f"{main_temp}"
+                    return f'{main_temp}'
 
     except:
-        return "Temperature Unknown"
+        return 'Temperature Unknown'
 
 
+@app.route('/')
+def index():
+    return '<h1>Server Stats is running :3</h1>'
 
 
 @app.route('/stats')
@@ -46,8 +49,8 @@ def stats():
     temp = get_temp()
     cpu_usage = psutil.cpu_percent()
 
-    return json.dumps({"uptime": uptime, "temp": temp, "cpu_usage": cpu_usage})
+    return json.dumps({'uptime': uptime, 'temp': temp, 'cpu_usage': cpu_usage})
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run()
